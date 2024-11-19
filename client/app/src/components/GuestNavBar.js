@@ -1,7 +1,13 @@
 import React, { useState } from "react"
 
-export default function GuestNavBar() {
+const GuestNavBar = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  }
+
 
   return (
     <>
@@ -22,11 +28,10 @@ export default function GuestNavBar() {
               href="javascript:void(0)"
             >
               <img
-                src="../public/marison-square-logo-white.png"
+                src="/marison-square-logo-white.png"
                 alt="Marison Hotel Logo"
-                classNmae="h-12 w-12"
+                className="h-24 w-24"
               />
-                Marison Hotel
             </a>
             {/*      <!-- Mobile trigger --> */}
             <button
@@ -70,7 +75,7 @@ export default function GuestNavBar() {
                 <a
                   role="menuitem"
                   aria-haspopup="false"
-                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-amber-500 focus:text-amber-600 focus:outline-none focus-visible:outline-none lg:px-8"
+                  className="flex items-center gap-2 py-4 transition-colors duration-300 hover:text-amber-600 focus:text-amber-600 focus:outline-none focus-visible:outline-none lg:px-8"
                   href="javascript:void(0)"
                 >
                   <svg
@@ -93,10 +98,61 @@ export default function GuestNavBar() {
                 </a>
               </li>
             </ul>
+
             <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">
               <button className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded bg-red-700 px-5 text-sm font-medium tracking-wide text-white shadow-md shadow-dark red-800 transition duration-300 hover:bg-red-800 hover:shadow-sm hover:shadow-red-700 focus:bg-red-700 focus:shadow-sm focus:shadow-emerald-200 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-emerald-300 disabled:bg-emerald-300 disabled:shadow-none">
                 <span>Contact us</span>
               </button>
+
+              {/* Guest Avatar with dropdown menu */}
+              <div class name="relative ml-4">
+                <button
+                  onClick={toggleMenu}
+                  className="flex items-center gap-2 p-1 rounded-full focus:outline-none focus-visible:outline-none"
+                  >
+                    {/* Guest Avatar Image*/}
+                    <span className="text-lg font-bold px-4">USER</span>
+                  </button>
+                  {/* Dropdown menu */}
+                  {isMenuOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md border border-gray-200">
+                    <ul className="text-sm">
+                      <li>
+                        <a
+                          href="#profile"
+                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        >
+                          Profile
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#check-booking"
+                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        >
+                          Check Booking Status
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#settings"
+                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        >
+                          Settings
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href="#logout"
+                          className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                        >
+                          Log Out
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
           </nav>
         </div>
@@ -106,3 +162,4 @@ export default function GuestNavBar() {
     // add logo
   )
 } 
+export default GuestNavBar;
