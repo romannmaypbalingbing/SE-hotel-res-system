@@ -1,43 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import GuestNavBar from '../components/GuestNavBar';
 import Stepper from '../components/Stepper';
 
 const BookaRoom = () => {
-    const [lastName, setLastName] = React.useState({
-        "id-01": "",
-    })
-    const [firstName, setFirstName] = React.useState({
-        "id-02": "",
-    })
+    const [formData, setFormData] = React.useState({
+        lastName: "",
+        firstName: "",
+        email: "",
+        contactNumber: "",
+        address: "",
+        country: "",
+    });
+
+    const [shuttleService, setShuttleService] = React.useState(false);
 
 
     const handleChange = evt => {
-        const value = evt.target.value;
-        setLastName({
-            ...lastName,
-            ...firstName,
-            [evt.target.name]: value
-        })
-    }
+        const { name, value } = evt.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
 
-    const region = [
-        "Abra", "Agusan del Norte", "Agusan del Sur", "Aklan", "Albay", "Antique",
-        "Apayao", "Aurora", "Basilan", "Bataan", "Batanes", "Batangas", "Benguet",
-        "Biliran", "Bohol", "Bukidnon", "Bulacan", "Cagayan", "Camarines Norte",
-        "Camarines Sur", "Camiguin", "Capiz", "Catanduanes", "Cavite", "Cebu",
-        "Cotabato", "Davao de Oro", "Davao del Norte", "Davao del Sur", "Davao Occidental",
-        "Davao Oriental", "Dinagat Islands", "Eastern Samar", "Guimaras", "Ifugao",
-        "Ilocos Norte", "Ilocos Sur", "Iloilo", "Isabela", "Kalinga", "La Union",
-        "Laguna", "Lanao del Norte", "Lanao del Sur", "Leyte", "Maguindanao del Norte",
-        "Maguindanao del Sur", "Marinduque", "Masbate", "Metro Manila", "Misamis Occidental",
-        "Misamis Oriental", "Mountain Province", "Negros Occidental", "Negros Oriental",
-        "Northern Samar", "Nueva Ecija", "Nueva Vizcaya", "Occidental Mindoro",
-        "Oriental Mindoro", "Palawan", "Pampanga", "Pangasinan", "Quezon", "Quirino",
-        "Rizal", "Romblon", "Samar", "Sarangani", "Siquijor", "Sorsogon", "South Cotabato",
-        "Southern Leyte", "Sultan Kudarat", "Sulu", "Surigao del Norte", "Surigao del Sur",
-        "Tarlac", "Tawi-Tawi", "Zambales", "Zamboanga del Norte", "Zamboanga del Sur",
-        "Zamboanga Sibugay",
-      ];
+    const handleShuttleChange = () => {
+        setShuttleService(!shuttleService);
+    };
+
+    const handlearrivalDateChange = (evt) => {
+        setSelectedDateTime(evt.target.value);
+    };
 
     const country = [
         "Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
@@ -83,127 +75,128 @@ const BookaRoom = () => {
                 <Stepper />
 
                 {/* This is the FormLayout component */}
-                <div className="flex justify-center items-start h-screen pt-0">
+                <div className="flex justify-center items-start h-screen pt-">
                     <div className="bg-white p-6 w-1/2 shadow-md rounded-lg"> {/* Form container set to white with rounded corners */}
                         <div className="grid grid-cols-2 gap-4"> {/* Grid layout with 2 columns */}
                             
                             {/* Guest Information label */}
                             <div className="col-span-2">
-                                <h2 className="text-xl font-semibold text-slate-700 text-left">
-                                    Guest Information
+                                <h2 className="text-xl font-semibold text-slate-600 text-left">
+                                    Guest Information #1
                                 </h2>
                             </div>
 
                             {/*    <!-- Last Name Input Field --> */}
                             <div className="relative">
                                 <input
-                                id="id-01"
-                                type="text"
-                                name="id-01"
-                                placeholder="Last Name"
-                                className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                onChange={handleChange}
+                                    id="lastName"
+                                    type="text"
+                                    name="lastName"
+                                    placeholder="Last Name"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
+                                    className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                                 />
                                 <label
-                                htmlFor="id-01"
-                                className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                    htmlFor="lastName"
+                                    className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-500 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                                 >
-                                Last Name
+                                    Last Name
                                 </label>
                             </div>
-                            {/*    <!-- End --> */}
+
 
                             {/*    <!-- First Name Input Field --> */}
                             <div className="relative">
                                 <input
-                                id="id-02"
-                                type="text"
-                                name="id-02"
-                                placeholder="First Name"
-                                className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                onChange={handleChange}
+                                    id="firstName"
+                                    type="text"
+                                    name="firstName"
+                                    placeholder="First Name"
+                                    value={formData.firstName}
+                                    onChange={handleChange}
+                                    className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                                 />
                                 <label
-                                htmlFor="id-01"
-                                className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                    htmlFor="firstName"
+                                    className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-500 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                                 >
-                                First Name
+                                    First Name
                                 </label>
                             </div>
-                            {/*    <!-- End --> */}
 
                             {/* Email Input Field */}
                             <div className="relative">
                                 <input
-                                id="id-02"
-                                type="text"
-                                name="id-02"
-                                placeholder="First Name"
-                                className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                onChange={handleChange}
+                                    id="email"
+                                    type="text"
+                                    name="email"
+                                    placeholder="Email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"     
                                 />
                                 <label
-                                htmlFor="id-01"
-                                className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                    htmlFor="email"
+                                    className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-500 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                                 >
                                 Email
                                 </label>
                             </div>
-                            {/* End */}
 
                             {/* Contact Number Input Field */}
                             <div className="relative">
                                 <input
-                                id="id-02"
-                                type="text"
-                                name="id-02"
-                                placeholder="Contact Number"
-                                className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                onChange={handleChange}
+                                    id="contactNumber"
+                                    type="text"
+                                    name="contactNumber"
+                                    placeholder="Contact Number"
+                                    value={formData.contactNumber}
+                                    onChange={handleChange}
+                                className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"                               
                                 />
                                 <label
-                                htmlFor="id-01"
-                                className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                    htmlFor="contactNumber"
+                                    className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-500 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                                 >
                                 Contact Number
                                 </label>
                             </div>
-                            {/* End */}
                         </div>
 
-                        <div className="w-full border-t border-slate-300 mt-6 "></div> {/* Adds line below the Contact Number field */}
+                        {/* Adds line below the Contact Number field */}
+                        <div className="w-full border-t border-slate-300 mt-6 "></div> 
 
                         {/* Address Input Field */}
                         <div className="relative my-6">
                             <input
-                                id="id-02"
+                                id="address"
                                 type="text"
-                                name="id-02"
-                                placeholder="Contact Number"
+                                name="address"
+                                placeholder="Address"
+                                value={formData.address}
                                 className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                                 onChange={handleChange}
                             />
                             <label
-                                htmlFor="id-01"
-                                className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
-                            >
-                                Address
+                                htmlFor="address"
+                                className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-500 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent">
+                                Address (Optional)
                             </label>
                         </div>
-                        {/* End */}
 
                         {/* 2 column grid */}
                         <div className="grid grid-cols-2 gap-4">
                             {/*    <!-- Country  --> */}
                             <div className="relative">
-                                <label htmlFor="country" 
-                                    className="block text-sm font-medium text-gray-700">
+                                <label 
+                                    htmlFor="country" 
+                                    className="block text-sm font-medium text-slate-700">
                                 </label>
                                 <select
                                     id="country"
                                     name="country"
-                                    className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                >
+                                    className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400">
                                     <option value="" disabled selected>
                                             -- Country --
                                         </option>
@@ -212,74 +205,53 @@ const BookaRoom = () => {
                                                 {country}
                                             </option>
                                         ))}
-                                </select>
-                                    
-                                </div>
-
-                            {/*    <!-- Component: Rounded basic input  --> */}
-                            <div className="relative">
-                                <label htmlFor="region" 
-                                    className="block text-sm font-medium text-gray-700">
-                                </label>
-                                <select
-                                    id="region"
-                                    name="region"
-                                    className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400">
-                                    <option value="" disabled selected>
-                                        -- Region --
-                                    </option>
-                                    {region.map((region, index) => (
-                                        <option key={index} value={region}>
-                                            {region}
-                                        </option>
-                                    ))}
-                                </select>
+                                </select>     
                             </div>
-                            {/*    <!-- End Rounded basic input  --> */}
-
-                            <div className="relative">
-                                <input
-                                id="id-02"
-                                type="text"
-                                name="id-02"
-                                placeholder="First Name"
-                                className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                onChange={handleChange}
-                                />
-                                <label
-                                htmlFor="id-01"
-                                className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
-                                >
-                                Email
-                                </label>
-                            </div>
-
-                            <div className="relative">
-                                <input
-                                id="id-02"
-                                type="text"
-                                name="id-02"
-                                placeholder="Contact Number"
-                                className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
-                                onChange={handleChange}
-                                />
-                                <label
-                                htmlFor="id-01"
-                                className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
-                                >
-                                Contact Number
-                                </label>
-                                
-                            </div>
-                            
                         </div>
-                        <div className="w-full border-t border-slate-300 mt-6 "></div> {/* Adds line below the Contact Number field */}
 
-                        <div className="relative my-6">
+                        {/* Adds line below the Contact Number field */}
+                        <div className="w-full border-t border-slate-300 mt-6 "></div>
+
+                        {/* Additional Information label */}
+                        <label className="block text-sm text-xl text-slate-500 text-left mt-4">
+                            Additional Information
+                        </label>
+
+                        {/* Checkbox for services */}
+                        <div className="flex items-center mt-4">
                             <input
-                                id="id-02"
+                                type="checkbox"
+                                id="shuttleservice"
+                                className="form-checkbox h-5 w-5 text-red-600 border-slate-400 rounded"
+                            />
+                            <label htmlFor="shuttleservice" className="ml-2 block text-base text-slate-500 mr-2 inline-block transition-colors duration-200 peer-checked:bg-red-500 peer-checked:border-red-500">
+                                 Hotel Shuttle Service
+                            </label>
+                        </div>
+                        
+                        {/* Additional options if shuttle service is checked */}
+                        {shuttleService && (
+                            <div className="relative my-4">
+                                <label htmlFor="arrivalDate">Arrival Date:</label>
+                                <select
+                                    id="date"
+                                    value={setSelectedDateTime.split(" ")[0] || ""}
+                                    onChange={handlearrivalDateChange}
+                                    className="form-select"
+                                >
+                                    <option value="">Select a Date</option>
+                                    
+                                </select>
+                                
+                        )};
+
+
+
+                        <div className="relative my-4">
+                            <input
+                                id="addInfo"
                                 type="text"
-                                name="id-02"
+                                name="addInfo"
                                 placeholder="Contact Number"
                                 className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                                 onChange={handleChange}
@@ -288,7 +260,7 @@ const BookaRoom = () => {
                                 htmlFor="id-01"
                                 className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                             >
-                                Address
+                                Additional Informaton
                             </label>
                         </div>
                         
