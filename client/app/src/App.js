@@ -4,6 +4,7 @@ import GuestNavBar from './components/GuestNavBar';
 import ReservationInfo from './guest/ReservationInfo';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import BookaRoom from './guest/BookaRoom';
+import GuestInfo from './guest/GuestInfo';
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <div className="App">
         <Routes>
           {/* Default route point */}
-          <Route exact path="/" element={<BookaRoom />} />
+          <Route exact path="/" element={<GuestInfo />} />
           {/* Define the route for ReservationInfo page */}
           <Route path="/reservation-info" element={<ReservationInfo />} />
 
