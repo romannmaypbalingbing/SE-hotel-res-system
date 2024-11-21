@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import GuestNavBar from '../components/GuestNavBar';
 import Stepper from '../components/Stepper';
+import DateTimePicker from '../components/DateTimePicker';
+import { PlusIcon } from '@heroicons/react/20/solid';
 
-const BookaRoom = () => {
+const GuestInfo = () => {
     const [formData, setFormData] = React.useState({
-        lastName: "",
-        firstName: "",
-        email: "",
-        contactNumber: "",
-        address: "",
-        country: "",
+        lastName: '',
+        firstName: '',
+        email: '',
+        contactNumber: '',
+        address: '',
+        country: '',
     });
+    
 
-    const [shuttleService, setShuttleService] = React.useState(false);
-
-
-    const handleChange = evt => {
+    const handleChange = (evt) => {
         const { name, value } = evt.target;
         setFormData((prevData) => ({
             ...prevData,
@@ -23,13 +23,31 @@ const BookaRoom = () => {
         }));
     };
 
+    const [shuttleService, setShuttleService] = React.useState(false);
+
     const handleShuttleChange = () => {
         setShuttleService(!shuttleService);
     };
 
-    const handlearrivalDateChange = (evt) => {
-        setSelectedDateTime(evt.target.value);
+    const [dateTime, setDateTime] = useState(null);
+
+    const handlearrivalDateTimeChange = (evt) => {
+        setDateTime(evt.target.value);
     };
+
+    const [Guests, setGuests] = React.useState([{id: 1, formData: { firstName: "", lastName: "", email: "", contactNumber: "", country: "", address: "" } }]);
+
+    const handleGuestChange = (evt, guestID) => {
+        const { name, value } = evt.target;
+        setGuests((prevGuests) =>
+            prevGuests.map((guest) => 
+                guest.id === guestID
+                ? { ...guest, formData: { ...guest.formData, [name]: value } }
+                : guest
+            )
+        );
+    };
+
 
     const country = [
         "Afghanistan", "Aland Islands", "Albania", "Algeria", "American Samoa", "Andorra", "Angola",
@@ -70,15 +88,15 @@ const BookaRoom = () => {
       
 
         return (
-            <div className="bg-slate-100 h-screen"> {/* Set background to slate-100 */}
+            <div className="bg-slate-100 fullscreen"> {/* Set background to slate-100 */}
                 <GuestNavBar /> 
                 <Stepper />
 
                 {/* This is the FormLayout component */}
-                <div className="flex justify-center items-start h-screen pt-">
+                <div className="flex justify-center items-start h-screen pt-8">
                     <div className="bg-white p-6 w-1/2 shadow-md rounded-lg"> {/* Form container set to white with rounded corners */}
+                        
                         <div className="grid grid-cols-2 gap-4"> {/* Grid layout with 2 columns */}
-                            
                             {/* Guest Information label */}
                             <div className="col-span-2">
                                 <h2 className="text-xl font-semibold text-slate-600 text-left">
@@ -221,31 +239,33 @@ const BookaRoom = () => {
                         <div className="flex items-center mt-4">
                             <input
                                 type="checkbox"
-                                id="shuttleservice"
-                                className="form-checkbox h-5 w-5 text-red-600 border-slate-400 rounded"
+                                id="shuttleService"
+                                name="shuttleService"
+                                checked={shuttleService}
+                                onChange={handleShuttleChange}
+                                className="peer"
                             />
-                            <label htmlFor="shuttleservice" className="ml-2 block text-base text-slate-500 mr-2 inline-block transition-colors duration-200 peer-checked:bg-red-500 peer-checked:border-red-500">
-                                 Hotel Shuttle Service
+                            <label htmlFor="shuttleservice" 
+                                   className="ml-2 block text-base text-slate-500 mr-2 inline-block">
+                                    Hotel Shuttle Service
                             </label>
                         </div>
                         
                         {/* Additional options if shuttle service is checked */}
                         {shuttleService && (
-                            <div className="relative my-4">
-                                <label htmlFor="arrivalDate">Arrival Date:</label>
-                                <select
-                                    id="date"
-                                    value={setSelectedDateTime.split(" ")[0] || ""}
-                                    onChange={handlearrivalDateChange}
-                                    className="form-select"
-                                >
-                                    <option value="">Select a Date</option>
-                                    
-                                </select>
-                                
-                        )};
-
-
+                            <div className="flex flex-col">
+                            <label htmlFor="arrivalDateTime" className="block text-sm font-medium text-slate-500 text-left mt-2">
+                                Arrival Date and Time
+                            </label>
+                            <input
+                                type="date"
+                                id="arrivalDateTime"
+                                value={dateTime}
+                                onChange={(e) => setDateTime(e.target.value)}
+                                className="peer relative h-10 w-1/2 rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                            />
+                        </div>
+                        )}
 
                         <div className="relative my-4">
                             <input
@@ -253,28 +273,26 @@ const BookaRoom = () => {
                                 type="text"
                                 name="addInfo"
                                 placeholder="Contact Number"
-                                className="peer relative h-10 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
+                                className="peer relative h-20 w-full rounded border border-slate-400 px-4 text-sm text-slate-500 placeholder-transparent outline-none transition-all autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-red-900 focus:outline-none invalid:focus:border-pink-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400"
                                 onChange={handleChange}
                             />
                             <label
-                                htmlFor="id-01"
-                                className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-400 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
+                                htmlFor="addInfo"
+                                className="absolute left-2 -top-2 z-[1] cursor-text px-2 text-xs text-slate-500 transition-all before:absolute before:top-0 before:left-0 before:z-[-1] before:block before:h-full before:w-full before:bg-white before:transition-all peer-placeholder-shown:top-2.5 peer-placeholder-shown:text-sm peer-autofill:-top-2 peer-required:after:text-pink-500 peer-required:after:content-['\00a0*'] peer-invalid:text-pink-500 peer-focus:-top-2 peer-focus:cursor-default peer-focus:text-xs peer-focus:text-red-900 peer-invalid:peer-focus:text-pink-500 peer-disabled:cursor-not-allowed peer-disabled:text-slate-400 peer-disabled:before:bg-transparent"
                             >
-                                Additional Informaton
+                                Notes and Requests (150 characters)
                             </label>
                         </div>
                         
-                        
                         <div className="mt-6">
-                            <button className="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded">
-                                Search
+                            <button className="w-full bg-red-700 hover:bg-red-800 text-white font-medium py-2 px-4 rounded">
+                                Proceed to Payment
                             </button>
                         </div>
-                        
                     </div>
                 </div>
             </div>
         );
     }
     
-export default BookaRoom;
+export default GuestInfo;
