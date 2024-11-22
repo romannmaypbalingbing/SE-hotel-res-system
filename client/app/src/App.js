@@ -12,11 +12,13 @@ function App() {
       <div className="App">
         <Routes>
           {/* Default route point */}
-          <Route exact path="/reservation" element={<ReservationInfo supabaseClient={supabase} />} />
-          {/* Define the route for ReservationInfo page */}
-          <Route path="/book-room" element={<BookaRoom supabaseClient={supabase} />} />
+          <Route path="/" element={<ReservationInfo supabaseClient={supabase} />} /> 
 
+          {/* Define the route for ReservationInfo page */}
+          <Route exact path="/reservation" element={<ReservationInfo supabaseClient={supabase} />} />
           {/* Define the route for BookaRoom page */}
+          <Route path="/book-room" element={<BookaRoom supabaseClient={supabase} />} />
+          {/* Define the route for GuestInfo page */}
           <Route path="/guest-info" element={<GuestInfo supabaseClient={supabase} />} />
         </Routes>
       </div>
