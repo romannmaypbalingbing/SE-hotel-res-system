@@ -12,7 +12,7 @@ function App() {
       <div className="App">
         <Routes>
           {/* Default route point */}
-          <Route exact path="/" element={<BookaRoom />} />
+          <Route exact path="/" element={<GuestInfo />} />
           {/* Define the route for ReservationInfo page */}
           <Route path="/reservation-info" element={<ReservationInfo />} />
 

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import GuestNavBar from '../components/GuestNavBar';
 import Stepper from '../components/Stepper';
+import RoomModal from '../components/RoomModal';
 
 const BookaRoom = () => (
     <div className="bg-slate-100 fullscreen"> {/* Set background to slate-100 */}
@@ -18,7 +19,7 @@ const BookaRoom = () => (
                     <div className="bg-white flex justify-center items-center">
                         <div className="flex flex-col">
                             {/* TITLE */}
-                            <h2 className="text-2xl font-semibold text-red-700 text-left">Deluxe King</h2>
+                            <h2 className="text-2xl font-bold text-red-700 text-left">Deluxe King</h2>
                             
                             {/* Form container with fixed image size */}
                             <a href="/book-a-room" className="text-xl font-bold text-slate-600 text-left">
@@ -31,16 +32,16 @@ const BookaRoom = () => (
                             
                             {/* Icon and Text #1*/}
                             <div className="flex items-center text-left mb-2">
-                                <p className="text-sm text-slate-600 px-1">2 Adults | 2 Children</p>
-                                <p className="text-sm text-slate-400">(12 years old and below)</p>
+                                <p className="text-base text-slate-600 px-2">2 Adults | 2 Children</p>
+                                {/* <p className="text-sm text-slate-400">(12 years old and below)</p> */}
                             </div>
 
                             {/* Icon and Text #1*/}
-                            <p className="text-sm text-slate-400 flex items-center text-left px-2">
+                            <p className="text-sm text-slate-400 flex items-center text-left px-2 mb-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1.4em" height="1.4em" viewBox="0 0 256 256" className="mr-3">
                                 <path fill="#9f1239" d="m219.31 108.68l-80-80a16 16 0 0 0-22.62 0l-80 80A15.87 15.87 0 0 0 32 120v96a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-56h32v56a8 8 0 0 0 8 8h64a8 8 0 0 0 8-8v-96a15.87 15.87 0 0 0-4.69-11.32M208 208h-48v-56a8 8 0 0 0-8-8h-48a8 8 0 0 0-8 8v56H48v-88l80-80l80 80Z"></path>
                             </svg>      
-                                25㎡ | Floor: 2,3
+                                25 ㎡ | Floor: 2, 3
                             </p>
                             {/* Icon and Text #2 */}
                             <p className="text-sm text-slate-400 flex items-center text-left px-2">
@@ -54,25 +55,71 @@ const BookaRoom = () => (
 
                     {/* 2ND CONTAINER */}
                     <div className="col-span-2 bg-white p-6 shadow-md rounded-base"> {/* Form container set to white with rounded corners */}
-                        <h2 className="text-2xl font-semibold text-red-700 text-left">Deluxe King</h2>
+                        <div className="flex items-center gap-2 mb-4">
+                            <h2 className="text-3xl font-semibold text-slate-700">PHP 4,600.00</h2>
+                            <h2 className="text-2xl text-slate-400">/night</h2>
+                        </div>
                         <div className="grid grid-cols-3 gap-4">
-                            <p className="text-sm text-slate-400 flex items-center text-left px-2">
-                                <img 
-                                    src="/icons/fork-and-spoon.png"
-                                    alt="Fork and Spoon Icon"
-                                    className="w-4 h-5 mr-3 mt-3"
-                                />
-                                Free Breakfast
-                            </p>    
+                            <div className="flex flex-col">
+                                <p className="text-sm text-slate-400 flex items-center text-left px-2">
+                                    <img 
+                                        src="/icons/fork-and-spoon.png"
+                                        alt="Fork and Spoon Icon"
+                                        className="w-4 h-5 mr-3 mt-3"
+                                    />
+                                    <span className="mt-2">Breakfast included</span>
+                                </p>
+
+                                <p className="text-sm text-slate-400 flex items-center text-left px-2">
+                                    <img 
+                                        src="/icons/fork-and-spoon.png"
+                                        alt="Fork and Spoon Icon"
+                                        className="w-4 h-5 mr-3 mt-3"
+                                    />
+                                    <span className="mt-2">Wi-Fi Access</span>
+                                </p>
+
+                                <p className="text-sm text-slate-400 flex items-center text-left px-2">
+                                    <img 
+                                        src="/icons/fork-and-spoon.png"
+                                        alt="Fork and Spoon Icon"
+                                        className="w-4 h-5 mr-3 mt-3"
+                                    />
+                                    <span className="mt-2">Ensuite Bathroom</span>
+                                </p>
+                                <p className="text-sm text-slate-400 flex items-center text-left px-2">
+                                    <img 
+                                        src="/icons/fork-and-spoon.png"
+                                        alt="Fork and Spoon Icon"
+                                        className="w-4 h-5 mr-3 mt-3"
+                                    />
+                                    <span className="mt-2">Shuttle Service</span>
+                                </p>
+                                {/* Button for "Show More" */}
+                                <RoomModal />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div className="bg-white p-6 shadow-md rounded-lg"> {/* Form container set to white with rounded corners */}
-                <h2 className="text-base font-semibold text-slate-600">Room Details</h2>
-                <p className="text-sm text-slate-400">Fill in the form to book a room</p>
+                <h2 className="text-lg font-semibold text-amber-600 text-left">Reserved Rooms</h2>
+                <div className="col-span-2 bg-white p-6 shadow-md rounded-lg">
+                    <span>Here lies the room selected :'D</span>
+                    
+                </div>
+                <div className="flex justify-between gap-2 px-10 mt-4 ">
+                    <div>
+                        <span className="text-base font-semibold text-slate-500">Check-In</span>
+                    </div>
+                    <div>
+                        <span className="text-base font-semibold text-slate-500">Check-Out</span>
+                    </div>
+                        
             </div>
+            </div>
+            
         </div>
     </div>
 );
