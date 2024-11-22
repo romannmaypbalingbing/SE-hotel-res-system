@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import GuestNavBar from '../components/GuestNavBar';
 import Stepper from '../components/Stepper';
 
+
 const ReservationInfo = () => {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
