@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import GuestNavBar from '../components/GuestNavBar';
 import Stepper from '../components/Stepper';
-import RoomModal from '../components/RoomModal';
+// import RoomModal from '../components/RoomModal';
 
 const BookaRoom = () => (
     <div className="bg-slate-100 fullscreen"> {/* Set background to slate-100 */}
@@ -96,7 +96,7 @@ const BookaRoom = () => (
                                     <span className="mt-2">Shuttle Service</span>
                                 </p>
                                 {/* Button for "Show More" */}
-                                <RoomModal />
+                                {/* <RoomModal /> */}
                             </div>
                         </div>
                     </div>

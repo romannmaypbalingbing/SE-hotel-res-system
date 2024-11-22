@@ -3,19 +3,34 @@ import { useNavigate } from 'react-router-dom';
 import GuestNavBar from '../components/GuestNavBar';
 import Stepper from '../components/Stepper';
 
-
-const ReservationInfo = () => {
+const ReservationInfo = ({ supabaseClient }) => {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [paxAdult, setPaxAdult] = useState('');
     const [paxChildren, setPaxChildren] = useState('');
     const navigate = useNavigate();
 
-    const handleSearch = () => {
+    const handleSearch = async () => {
         // Add search functionality here
         if(checkIn && checkOut && paxAdult && paxChildren) {
-            navigate('/bookaroom');
-        }
+            try{
+                const { error } = await supabaseClient.from('reservation').insert({
+                    res_checkin: checkIn,
+                    res_checkout: checkOut,
+                    res_paxadult: paxAdult,
+                    res_paxchildren: paxChildren
+                });
+
+                if (error) {
+                    console.error('Error inserting reservation:', error);
+                  } else {
+                    navigate('/bookaroom'); 
+                  }
+
+            } catch (error) {
+                console.error('Error during reservation:', error);
+            }
+        } 
     };
 
     return (

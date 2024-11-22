@@ -1,11 +1,10 @@
 import './App.css';
 import React, { useState } from 'react';
-import GuestNavBar from './components/GuestNavBar';
 import ReservationInfo from './guest/ReservationInfo';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import BookaRoom from './guest/BookaRoom';
 import GuestInfo from './guest/GuestInfo';
-import { supabase } from '../supabaseClient';
+import { supabase } from './supabaseClient';
 
 function App() {
   return (
@@ -13,12 +12,12 @@ function App() {
       <div className="App">
         <Routes>
           {/* Default route point */}
-          <Route exact path="/" element={<BookaRoom />} />
+          <Route exact path="/reservation" element={<ReservationInfo supabaseClient={supabase} />} />
           {/* Define the route for ReservationInfo page */}
-          <Route path="/reservation-info" element={<ReservationInfo />} />
+          <Route path="/book-room" element={<BookaRoom supabaseClient={supabase} />} />
 
           {/* Define the route for BookaRoom page */}
-          <Route path="/book-a-room" component={<BookaRoom/>} />
+          <Route path="/guest-info" element={<GuestInfo supabaseClient={supabase} />} />
         </Routes>
       </div>
     </Router>
