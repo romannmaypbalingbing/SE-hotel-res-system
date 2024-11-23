@@ -1,7 +1,6 @@
 import React from 'react';
 import GuestNavBar from '../components/GuestNavBar';
 import Stepper from '../components/Stepper';
-import {}
  
 const BookaRoom = ({ supabase }) => {
 
@@ -57,8 +56,9 @@ const BookaRoom = ({ supabase }) => {
                         </div>
 
                         {/* 2ND CONTAINER */}
-                        <div className="col-span-2 bg-white p-6 shadow-md rounded-base"> {/* Form container set to white with rounded corners */}
-                            <h2 className="text-2xl font-semibold text-red-700 text-left">Deluxe King</h2>
+                        <div className="col-span-2 bg-white p-6 shadow-md rounded-base text-left"> {/* Form container set to white with rounded corners */}
+                            <span className="text-3xl font-semibold text-slate-700 text-left">PHP 4,600 </span>
+                            <span className="text-2xl text-slate-400">/night</span>
                             <div className="grid grid-cols-3 gap-4">
                                 <p className="text-sm text-slate-400 flex items-center text-left px-2">
                                     <img 
@@ -70,12 +70,12 @@ const BookaRoom = ({ supabase }) => {
                                 </p>    
                             </div>
 
-                            <div className="grid grid-cols-3 gap-4">
+                            <div className="grid grid-cols-2 gap-4">
                                 <p className="text-sm text-slate-400 flex items-center text-left px-2">
                                     <img 
                                         src="/icons/fork-and-spoon.png"
                                         alt="Fork and Spoon Icon"
-                                        className="w-4 h-5 mr-3 mt-3"
+                                        className="w-4 h-5 mr-3 mt-3 mb-2"
                                     />
                                     Free Breakfast
                                 </p>    
@@ -85,7 +85,7 @@ const BookaRoom = ({ supabase }) => {
                 </div>
 
                 <div className="bg-white p-6 shadow-md rounded-lg"> {/* Form container set to white with rounded corners */}
-                    <h2 className="text-base font-semibold text-slate-600">Room Details</h2>
+                    <h2 className="text-lg font-semibold text-slate-600 text-left">Your Booked Rooms</h2>
                     <p className="text-sm text-slate-400">Fill in the form to book a room</p>
                 </div>
             </div>
