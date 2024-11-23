@@ -9,7 +9,7 @@ const BookaRoom = ({ supabase }) => {
             <Stepper />
 
             {/* This is the FormLayout component */}
-            <div className="grid grid-cols-3 gap-4 p-5">
+            <div className="container mx-auto mt-12 px-5 flex-grow">
                 {/* Left section: Room details */}
                 <div className="col-span-2 bg-white p-6 shadow-md rounded-lg">
                     {/* Room Container */}
