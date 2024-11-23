@@ -9,7 +9,7 @@ const BookaRoom = ({ supabase }) => {
             <Stepper />
 
             {/* This is the FormLayout component */}
-            <div className="container mx-auto mt-12 px-5 flex-grow">
+            <div className="grid grid-cols-3 gap-4 p-5">
                 {/* Left section: Room details */}
                 <div className="col-span-2 bg-white p-6 shadow-md rounded-lg">
                     {/* Room Container */}
@@ -120,7 +120,43 @@ const BookaRoom = ({ supabase }) => {
                         </div>
                     </div>
                 </div>
+                {/* Right section: Booking summary */}
+                <div className="col-span-1 bg-white p-6 shadow-md rounded-lg self-start">
+    <h3 className="text-xl font-semibold text-slate-700 mb-4">Booking Summary</h3>
+    
+    {/* Selected Room Details */}
+    <div className="mb-6">
+      <h4 className="text-lg font-medium text-red-700">Deluxe King</h4>
+      <p className="text-sm text-slate-500">2 Adults, 2 Children</p>
+      <p className="text-sm text-slate-500">Stay: 3 Nights</p>
+    </div>
+    
+    {/* Price Breakdown */}
+    <div className="mb-6">
+      <div className="flex justify-between text-slate-600">
+        <p className="text-sm">Price per night:</p>
+        <p className="text-sm">PHP 4,600</p>
+      </div>
+      <div className="flex justify-between text-slate-600">
+        <p className="text-sm">Nights:</p>
+        <p className="text-sm">3</p>
+      </div>
+      <div className="flex justify-between text-slate-600">
+        <p className="text-sm">Taxes and Fees:</p>
+        <p className="text-sm">PHP 600</p>
+      </div>
+      <div className="border-t my-4"></div>
+      <div className="flex justify-between font-semibold text-slate-700">
+        <p>Total:</p>
+        <p>PHP 14,400</p>
+      </div>
+    </div>
 
+    {/* Proceed Button */}
+    <button className="w-full bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded">
+      Proceed to Checkout
+    </button>
+  </div>
                 {/* 2nd */}
                 <div className="col-span-2 bg-white p-6 shadow-md rounded-lg">
                     {/* Room Container */}
@@ -1009,15 +1045,7 @@ const BookaRoom = ({ supabase }) => {
                     </div>
                 </div>
 
-                {/* Right section: Booking summary */}
-                <div className="grid col-span-3 mt-20">
-                    <div className="absolute top-0 right-0">
-                        <div className="bg-white p-6 shadow-md rounded-lg">
-                            <h2 className="text-lg font-semibold text-slate-600 text-left">Your Booked Rooms</h2>
-                            <p className="text-sm text-slate-400">Fill in the form to book a room</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     );
