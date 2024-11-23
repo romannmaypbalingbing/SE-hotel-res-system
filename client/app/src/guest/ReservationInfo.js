@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import GuestNavBar from '../components/GuestNavBar';
 import Stepper from '../components/Stepper';
-import { supabase } from '../supabaseClient';
 
 
-const ReservationInfo = () => {
+const ReservationInfo = ({ supabase }) => {
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
     const [paxAdult, setPaxAdult] = useState('');
